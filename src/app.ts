@@ -3,7 +3,10 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { connectMongo } from './util/dbConnect';
 import { CLIENT_URL } from './util/config';
+
+// Routes
 import testRouter from './routes/test';
+import userRoutes from './routes/userRoutes';
 
 const app: Express = express();
 
@@ -22,5 +25,5 @@ app.use(
 
 // -----------ROUTES----------------
 app.use('/test', testRouter);
-
+app.use("/user" , userRoutes);
 export default app;

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
 export interface IUser extends mongoose.Document {
-    fullName: string,
+    name: string,
     email:string,
     username:string,
     password:string,
@@ -31,14 +31,14 @@ const UserSchema  = new mongoose.Schema({
 
     profilePhoto:{
         type:String,
-        required:true
-    },   
+    }
 },{
     timestamps:true
 });
 
-UserSchema.pre("save", async  (next) => {
-    const user = this as IUser;
+// eslint-disable-next-line func-names, consistent-return
+UserSchema.pre("save", async function (next) {
+    const user = this as unknown as IUser;
 
     if(!user.isModified("password")) return next();
 
